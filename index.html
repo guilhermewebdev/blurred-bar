@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blur Bar</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        } 
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+        body{
+            margin: 0px;
+            background-image: url('17.png');
+            background-position: 0px 0px;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .top-bar {
+            height: 80px;
+            width: 100%;
+            background-color: rgba(20, 17, 17, 0.712);
+            position: fixed;
+            z-index: 99999;
+        }
+        .button {
+            height: 70px;
+            width: 70px;
+            margin: 5px 10px;
+            padding: 15px;
+        }
+        .btn {
+            height: 40px;
+            position: relative;
+            background-color: transparent;
+            border: 0px none transparent;
+        }
+        .btn div {
+            position: relative;
+            width: 30px;
+            height: 4px;
+            border-radius: 10px;
+            background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+            margin: 5px;
+        }
+        .lat-bar {
+            height: 100%;
+            width: 300px;
+            position: fixed;
+            z-index: 0;
+        }
+        .spacing {
+            height: 80px;
+            width: 100%;
+        }
+        .blur {
+            /* background-color: black; */
+            height: 100%;
+            width: 100%;
+            background-image: url('17.png');
+            background-position: 0px -60px;
+            background-size: cover;
+            width: 300px;
+            display: block;
+            position: fixed;
+            left: 0px;
+            height: 120%;
+            z-index: 1;
+            filter: blur(15px);
+            -webkit-filter: blur(15px);  
+        }   
+        .toggle-in {    
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s;   
+            -moz-animation-name: toggle-in;
+            -webkit-animation-name: toggle-in;
+            animation-name: toggle-in;
+            -moz-animation-direction: alternate;
+            -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+        }
+        .toggle-out{        
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s; 
+            -moz-animation-name: toggle-out;
+            -webkit-animation-name: toggle-out;
+            animation-name: toggle-out;
+            -moz-animation-direction: alternate;
+            -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+        }
+        .nav {
+            
+            text-align: center;
+            color: rgb(207, 220, 223);
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(255, 255, 255, 0.25);
+            z-index: 99;
+            margin: 20px 60px;
+            padding: 10px 60px;
+            display: block;
+            position: relative;
+            border-radius: 40px;
+        }
+        .toggle-blur-out{
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s; 
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s; 
+            -moz-animation-name: toggle-blur-out;
+            -webkit-animation-name: toggle-blur-out;
+            animation-name: toggle-blur-out;
+            -moz-animation-direction: alternate;
+            -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+        }
+        .toggle-blur-in{
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s; 
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s; 
+            -moz-animation-name: toggle-blur-in;
+            -webkit-animation-name: toggle-blur-in;
+            animation-name: toggle-blur-in;
+            -moz-animation-direction: alternate;
+            -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+        }
+        .toggle-menu-out{
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s; 
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s; 
+            -moz-animation-name: toggle-menu-out;
+            -webkit-animation-name: toggle-menu-out;
+            animation-name: toggle-menu-out;
+            -moz-animation-direction: alternate;
+            -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+        }
+        .toggle-menu-in{
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s; 
+            -moz-animation-duration: 0.3s;
+            -webkit-animation-duration: 0.3s;
+            animation-duration: 0.3s; 
+            -moz-animation-name: toggle-menu-in;
+            -webkit-animation-name: toggle-menu-in;
+            animation-name: toggle-menu-in;
+            -moz-animation-direction: alternate;
+            -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+        }
+
+        @keyframes toggle-in {
+            from {
+                width: 0px;
+            }
+            
+            to {
+                width: 300px;
+            }
+        }
+        @keyframes toggle-out {
+            from {
+                width: 300px;
+            }
+            
+            to {
+                width: 0px;
+            }
+        }
+
+        @keyframes toggle-blur-in {
+            from {
+                width: 0px;
+            }
+            
+            to {
+                width: 300px;
+            }
+        }
+        @keyframes toggle-blur-out {
+            from {
+                width: 300px;
+            }
+            
+            to {
+                width: 0px;
+            }
+        }
+        @keyframes toggle-menu-in {
+            from {
+                left: -300px;
+            }
+            
+            to {
+                left: 0px;
+            }
+        }
+        @keyframes toggle-menu-out {
+            from {
+                left: 0px;
+            }
+            
+            to {
+                left: -300px;
+            }
+        }
+        .filter {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.500);
+            z-index: 99;
+        }
+        .menu {
+            position: fixed;
+            z-index: 9999;
+            height: 100%;
+            width: 300px;
+        }
+        .btn-blur {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(255, 255, 255, 0.25);
+            color: rgb(214, 217, 218);
+            position: relative;
+            filter: brightness(1);
+            -webkit-filter: brightness(1);
+            border: none;
+        }
+    </style>
+    <script>
+        function toggle(){
+            let bar = document.getElementById('bar');
+            let blur = document.getElementById('blur');
+            let menu = document.getElementById('menu');
+            if(bar.style.width){
+                if(bar.style.width == '300px'){
+                    bar.classList.add('toggle-out');
+                    menu.classList.add('toggle-menu-out');
+                    blur.classList.add('toggle-blur-out');
+                    setTimeout(function(){
+                        bar.style.width = '0px';
+                        blur.style.width = '0px';
+                        menu.style.left = '-300px';
+                        bar.classList.remove('toggle-out');
+                        menu.classList.remove('toggle-menu-out');
+                        blur.classList.remove('toggle-blur-out');
+                    }, 300);
+                } else {
+                    bar.classList.add('toggle-in');
+                    menu.classList.add('toggle-menu-in');
+                    blur.classList.add('toggle-blur-in');
+                    setTimeout(function(){
+                        bar.style.width = '300px';
+                        blur.style.width = '300px';
+                        menu.style.left = '0px';
+                        menu.classList.remove('toggle-menu-in');
+                        bar.classList.remove('toggle-in');
+                        blur.classList.remove('toggle-blur-in');
+                    }, 300);
+                }
+            } else {
+                menu.classList.add('toggle-menu-out');
+                blur.classList.add('toggle-blur-out');
+                bar.classList.add('toggle-out');
+                setTimeout(function(){
+                    blur.style.width = '0px';
+                    bar.style.width = '0px';
+                    menu.style.left = '-300px';
+                    menu.classList.remove('toggle-menu-out');
+                    blur.classList.remove('toggle-blur-out');
+                    bar.classList.remove('toggle-out');
+                }, 300);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="button">
+            <button class="btn" onclick="toggle();">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+        </div>
+    </div>
+    <div class="lat-bar" id="bar">
+        <div class="spacing"></div>
+        <div class="blur" id="blur"></div>
+        <div class="filter"></div>
+        <div class="menu" id="menu">
+            <div class="nav">
+                button
+            </div>
+        </div>
+    </div>
+</body>
+</html>
